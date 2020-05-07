@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-deployment
+  labels:
+    app: nodejs
+spec:
+  selector:
+    matchLabels:
+      app: nodejs
+  template:
+    metadata:
+      labels:
+        app: nodejs
+    spec:
+      containers:
+      - name: nodejs
+        imagePullPolicy: "IfNotPresent"
+        image: imaskm/nodejs:hello
+        ports:
+        - name: nodejs-port
+          containerPort: 8080
+
+

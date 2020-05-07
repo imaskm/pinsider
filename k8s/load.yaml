@@ -1,0 +1,15 @@
+apiVersion: batch/v1 
+kind: Job 
+metadata: 
+  name: load 
+  labels: 
+    app: nodejs 
+    component: load 
+spec: 
+  template: 
+    spec: 
+      containers: 
+      - name: hpaload 
+        image: errm/ab 
+        args: ["-n1000" , "-c4" , "fib/30"] 
+      restartPolicy: OnFailure

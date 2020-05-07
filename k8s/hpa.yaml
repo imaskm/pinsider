@@ -1,0 +1,25 @@
+kind: HorizontalPodAutoscaler 
+apiVersion: autoscaling/v2beta2
+metadata: 
+  name: nodejs-deployment 
+spec:
+    minReplicas: 7
+    maxReplicas: 10
+    metrics:
+    - resource:
+        name: memory
+        target:
+          averageValue: 800Mi
+          type: AverageValue
+      type: Resource
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: 1
+          type: Utilization
+      type: Resource
+    scaleTargetRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: nodejs-deployment
+
